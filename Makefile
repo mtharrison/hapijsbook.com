@@ -1,11 +1,13 @@
 PUBLICSRC = web/public-src
 PUBLICDST = web/public-dst
 
-SRCJS = $(PUBLICSRC)/js/main.js $(PUBLICSRC)/js/mod.js
+SRCJS = $(PUBLICSRC)/js/main.js $(PUBLICSRC)/js/mod.js $(PUBLICSRC)/js/comp.js
 
-all: bfy
+all: jsx bfy
 
+jsx:
+	@./node_modules/react-tools/bin/jsx -x jsx web/public-src/js/ web/public-src/js/
 bfy:
-	browserify $(SRCJS) -o $(PUBLICDST)/js/bundle.js
+	@browserify $(SRCJS) -o $(PUBLICDST)/js/bundle.js
 
-.PHONY: bfy
+.PHONY: jsx bfy
